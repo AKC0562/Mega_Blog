@@ -23,16 +23,26 @@ function App() {
   }, [])
   
   return !loading ? (
-    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
-      <div className='w-full block'>
+    <div className='app-shell min-h-screen bg-[var(--bg)] text-[var(--ink)]'>
+      <div className='flex min-h-screen w-full flex-col'>
         <Header />
-        <main>
-        TODO:  <Outlet />
+        <main className="flex-1">
+          <Outlet />
         </main>
         <Footer />
       </div>
     </div>
-  ) : null
+  ) : (
+    <div className="grid min-h-screen place-items-center bg-[var(--bg)]">
+      <div className="flex flex-col items-center gap-5 text-center">
+        <div className="loader-quill" aria-hidden="true">M</div>
+        <p className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+          Opening the blog…
+        </p>
+        <div className="loader-bar" role="status" aria-label="Loading" />
+      </div>
+    </div>
+  )
 }
 
 export default App

@@ -1,8 +1,8 @@
-import  {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-export default function Protected({children, authentication = true}) {
+export default function Protected({ children, authentication = true }) {
 
     const navigate = useNavigate()
     const [loader, setLoader] = useState(true)
@@ -27,6 +27,13 @@ export default function Protected({children, authentication = true}) {
         setLoader(false)
     }, [authStatus, navigate, authentication])
 
-  return loader ? <h1>Loading...</h1> : <>{children}</>
+  return loader ? (
+    <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-5 px-4 py-24 text-center">
+      <div className="loader-quill" aria-hidden="true">M</div>
+      <p className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-[var(--muted)]">
+        Sharpening pencils…
+      </p>
+      <div className="loader-bar" role="status" aria-label="Loading" />
+    </div>
+  ) : <>{children}</>
 }
-

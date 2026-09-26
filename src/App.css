@@ -1,42 +1,57 @@
+/* App shell — intentionally minimal. All visual system lives in index.css.
+   (Old Vite demo styles removed: they forced #root centering and broke layout.) */
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  min-height: 100vh;
+  width: 100%;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* full-page loader (used while auth resolves) */
+.loader-quill {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  animation: loader-bob 1.1s ease-in-out infinite;
+  border: 2px solid var(--ink);
+  background: var(--mustard);
+  box-shadow: 4px 4px 0 0 var(--ink);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: #17130C;
+}
+@keyframes loader-bob {
+  0%, 100% { transform: rotate(-4deg) translateY(0); }
+  50% { transform: rotate(3deg) translateY(-6px); }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.loader-bar {
+  height: 8px;
+  width: 180px;
+  border-radius: 99px;
+  border: 2px solid var(--ink);
+  background: var(--surface);
+  overflow: hidden;
+  position: relative;
 }
-
-.card {
-  padding: 2em;
+.loader-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  border-radius: 99px;
+  background: var(--ember);
+  animation: loader-slide 1s ease-in-out infinite alternate;
 }
-
-.read-the-docs {
-  color: #888;
+@keyframes loader-slide {
+  from { left: -10%; }
+  to { left: 70%; }
 }
